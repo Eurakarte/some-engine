@@ -1,0 +1,6 @@
+CXX = clang++ -std=c++11 -Wall
+BUILD_OPT = `pkg-config --cflags --libs glfw3 luajit glew`
+LINK_OPT = `pkg-config --static --libs glfw3 luajit glew`
+
+: foreach src/*.cpp |> $(CXX) $(BUILD_OPT) -c %f -o %o |> bin/%B.o
+: bin/*.o |> $(CXX) $(LINK_OPT) %f -o %o |> bin/main
